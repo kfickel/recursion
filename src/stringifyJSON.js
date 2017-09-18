@@ -1,8 +1,3 @@
-// this is what you would do if you liked things to be easy:
-// var stringifyJSON = JSON.stringify;
-
-// but you don't so you're going to write it from scratch:
-
 var stringifyJSON = function(obj) {
 	if(obj === null) {
 		return 'null';
@@ -18,24 +13,20 @@ var stringifyJSON = function(obj) {
 	} else if (Array.isArray(obj)) {
 		var array = obj.slice(0, obj.length);
 		var stringArray = [];
-		if(obj.length === 0) {
-			return '[]';
-		} else {
-			function iterateArray(array) {
-				if(array.length === 0) {
-					return stringArray;
-				} else {
-					stringArray.push(stringifyJSON(array[0]));
-					array = array.slice(1, array.length);
-					iterateArray(array);
-				}
-			};
-			iterateArray(array);
-			if(stringArray.length === 1) {
-				return '[' + stringArray + ']';
+		function iterateArray(array) {
+			if(array.length === 0) {
+				return stringArray;
 			} else {
-				return '[' + stringArray.join(',') + ']';
+				stringArray.push(stringifyJSON(array[0]));
+				array = array.slice(1, array.length);
+				iterateArray(array);
 			}
+		};
+		iterateArray(array);
+		if(stringArray.length === 1) {
+			return '[' + stringArray + ']';
+		} else {
+			return '[' + stringArray.join(',') + ']';
 		}
 	} else if (typeof obj === 'object') {
 		var object = obj;
