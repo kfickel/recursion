@@ -4,7 +4,6 @@ var getElementsByClassName = function(className
 	var body = document.body;
 
 	function checkClassListAndChildren(element){
-		console.log(element);
 		if(element.classList){
 			for (var i = 0; i < element.classList.length; i++) {
 				if (className === element.classList[i]) {
@@ -18,7 +17,6 @@ var getElementsByClassName = function(className
 			}
 		}
 	}
-
 checkClassListAndChildren(body);
 
 return arrayForClassName;
